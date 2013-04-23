@@ -6,7 +6,7 @@ $(document).ready(function() {
 		var emailPost = email.val(); 
 		var senha = $("#senha");
 		var senhaPost = senha.val(); 	
-		$.post("cadastro.php", {nome: nomePost, email: emailPost, senha: senhaPost},
+		$.post("http://www.aaconcursos.com/app/cadastro.php", {nome: nomePost, email: emailPost, senha: senhaPost},
 		function(data){
 		 $("#resposta").html(data);
 		 }
