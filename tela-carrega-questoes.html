@@ -34,7 +34,7 @@ http://sharp-coders.com/web-development/load-json-data-with-jquery-and-php
         <script type="text/javascript">
         $(document).ready(function()
         {
-            $.getJSON("http://www.aaconcursos.com/app/questao.php",function(data){
+            $.getJSON("questao.php",function(data){
                 var select = $('#questao');
                 $('textarea[name=questao]').val(data[0].questao);
 				$('textarea[name=alterna]').val(data[0].alternA);

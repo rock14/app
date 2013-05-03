@@ -71,29 +71,7 @@ http://sharp-coders.com/web-development/load-json-data-with-jquery-and-php
         </script>
         <!-- fim js jquery carrega assunto -->
         
-        
-        
-        <!-- inicio js jquery carrega questao -->
-        <script type="text/javascript">
-        $(document).ready(function()
-        {
-            $.getJSON("questao.php",function(data){
-                var select = $('#cboQuestao');
-                if (select.prop) {
-                    var options = select.prop('options');
-                }
-                else {
-                    var options = select.attr('options');
-                }
-                $('option', select).remove();
-                $.each(data, function(key, value){
-                    options[options.length] = new Option(value['questao'], value['idQuestao']);
-                });
-            });
-        });
-        </script>
-        <!-- fim js jquery carrega questao -->
-        
+    
 </head>
 
 
@@ -114,10 +92,6 @@ http://sharp-coders.com/web-development/load-json-data-with-jquery-and-php
         
         <select name="cboAssunto" id="cboAssunto">
             <option value="standard">Escolha o assunto</option>
-        </select>
-        
-        <select name="cboQuestao" id="cboQuestao">
-            <option value="standard">Questoes</option>
         </select>
               
         <button id="qt">Iniciar Simulado</button>					        

@@ -17,7 +17,8 @@
         Dyeison Schreiner 
     </author>
 
-	
+	<access origin=".*"/>
+	<access origin="http://aaconcursos.com" />
 	<feature name="http://api.phonegap.com/1.0/file"/>
 	<feature name="http://api.phonegap.com/1.0/media"/>
 	<feature name="http://api.phonegap.com/1.0/network"/>
