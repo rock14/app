@@ -8,6 +8,8 @@
 <script type="text/javascript" src="cordova-2.7.0.js"></script>
 
 <script type="text/javascript" src="verifica_correta.js"></script>
+<link rel="stylesheet" href="estilo.css" />
+
 <!-- Fim configuracao cordova -->
 
 <!-- Inicio js jquery -->
@@ -80,7 +82,9 @@ function verificaChecks() {
 	</div>
   
     <div data-role="content">
-    	<a href="#" data-role="button" style="text-align: left"><span id="questao"></span></a>
+    	
+        <a href="#" data-role="button"><span id="questao"></span></a>
+
         <fieldset data-role="controlgroup">
           <input type="radio" name="radioquestoes" id="radio-choice-1" value="A" />
           <label for="radio-choice-1">A) <span id="alterna"></span></label>
@@ -101,7 +105,8 @@ function verificaChecks() {
         <div data-role="navbar">
             <ul>
                 <li><a href="#" data-role="button">< Anterior</a></li>
-                <li><a href="#" data-role="button" value="Valida Checks" onclick="verificaChecks(); this.onclick=null;">Responder</a></li>
+                <li><a href="#" data-role="button" value="Valida Checks" onClick="verificaChecks()">Responder</a></li>
+                <!-- ; this.onclick=null; -->
                 <li><a href="#" data-role="button">Próxima ></a></li>
             </ul>
         </div>
