@@ -1,8 +1,9 @@
 // JavaScript Document
 var correta = "I'm a global!";
-var i=0;
 var cont = 0;
 var j =0;
+var i =0;
+
 jsquestao = new Array();
 jsa = new Array();
 jsb = new Array();
@@ -11,20 +12,12 @@ jsd = new Array();
 jse = new Array();
 jscorreta = new Array();
 
-
+<!-- carrega questoes e alternativas -->
 function onDeviceReady(){
 			$.getJSON("http://www.aaconcursos.com/app/questao.php",function(data){
 				cont = Object.keys(data).length; //conta a quantidade de objetos no json
-				document.getElementById("questao").innerHTML = data[i].questao;
-				document.getElementById("alterna").innerHTML = document.getElementById("alterna").innerHTML.concat("A) ", data[i].alternA);
-				document.getElementById("alternb").innerHTML = document.getElementById("alternb").innerHTML.concat("B) ", data[i].alternB);
-				document.getElementById("alternc").innerHTML = document.getElementById("alternc").innerHTML.concat("C) ", data[i].alternC);
-				document.getElementById("alternd").innerHTML = document.getElementById("alternd").innerHTML.concat("D) ", data[i].alternD);
-				document.getElementById("alterne").innerHTML = document.getElementById("alterne").innerHTML.concat("E) ", data[i].alternE);
-				correta = data[i].correta; 	
-				// carrega a primeira questao na tela
-						
-				for(var k=1; k<cont; k++){ //insere as demais questoes no javascript
+							
+				for(var k=0; k<cont; k++){ //insere as questoes no javascript
 					jsquestao[k] = data[k].questao;
 					jsa[k] = data[k].alternA;
 					jsb[k] = data[k].alternB;
@@ -32,7 +25,15 @@ function onDeviceReady(){
 					jsd[k] = data[k].alternD;
 					jse[k] = data[k].alternE;
 					jscorreta[k] = data[k].correta;
-				}			
+				}
+				
+				// carrega a primeira questao na tela
+				document.getElementById("questao").innerHTML = jsquestao[0];
+				document.getElementById("alterna").innerHTML = ("A) " +jsa[0]);
+				document.getElementById("alternb").innerHTML = ("B) " +jsb[0]);
+				document.getElementById("alternc").innerHTML = ("C) " +jsc[0]);
+				document.getElementById("alternd").innerHTML = ("D) " +jsd[0]);
+				document.getElementById("alterne").innerHTML = ("E) " +jse[0]);				
 			})
 }
 
@@ -40,7 +41,7 @@ function onDeviceReady(){
 
 <!-- carrega proxima questao -->
 	function proximaQuestao(){
-		j++;
+		j=j+1;
 		if(j>=cont){
 			//alert("fim");
 			// desabilita proxima
@@ -52,7 +53,6 @@ function onDeviceReady(){
 			$('[type="button"]').button('refresh');
 			$("input[type='radio']").attr("checked",false).checkboxradio("refresh"); // desmarca todos os radios
 			
-			
 			document.getElementById("alterna").style.color="black";
 			document.getElementById("alternb").style.color="black";
 			document.getElementById("alternc").style.color="black";
@@ -60,22 +60,21 @@ function onDeviceReady(){
 			document.getElementById("alterne").style.color="black";
 			
 			document.getElementById("questao").innerHTML = jsquestao[j];
-			document.getElementById("alterna").innerHTML = document.getElementById("alterna").innerHTML.concat("A) ", jsa[j]);
-			document.getElementById("alternb").innerHTML = document.getElementById("alternb").innerHTML.concat("B) ", jsb[j]);
-			document.getElementById("alternc").innerHTML = document.getElementById("alternc").innerHTML.concat("C) ", jsc[j]);
-			document.getElementById("alternd").innerHTML = document.getElementById("alternd").innerHTML.concat("D) ", jsd[j]);
-			document.getElementById("alterne").innerHTML = document.getElementById("alterne").innerHTML.concat("E) ", jse[j]);	
-			correta = jscorreta[j];		
+			document.getElementById("alterna").innerHTML = ("A) " +jsa[j]);
+			document.getElementById("alternb").innerHTML = ("B) " +jsb[j]);
+			document.getElementById("alternc").innerHTML = ("C) " +jsc[j]);
+			document.getElementById("alternd").innerHTML = ("D) " +jsd[j]);
+			document.getElementById("alterne").innerHTML = ("E) " +jse[j]);		
 		}	
 	}
 <!-- carrega proxima questao -->
 
 <!-- verifica resposta -->
 function verificaChecks() {
-	var aChk = document.getElementsByName("radioquestoes");
+	var aChk = document.getElementsByName("radioquestoes"); //aChk recebe o valor do radio
 	for (var i=0;i<aChk.length;i++){  
 		if (aChk[i].checked == true){  
-			if (aChk[i].value == correta){
+			if (aChk[i].value == jscorreta[j]){
 				// acertou
 				// desabilita reponder
 				//$('[type="submit"]').button('disable');			
@@ -83,32 +82,29 @@ function verificaChecks() {
 				document.getElementById('responder').disabled = true;
 				$('[type="button"]').button('refresh');
 				
-				if(correta== "A")
+				if(jscorreta[j]== "A")
 					document.getElementById("alterna").style.color="#339933";
-				if(correta== "B")
+				if(jscorreta[j]== "B")
 					document.getElementById("alternb").style.color="#339933";
-				if(correta== "C")
+				if(jscorreta[j]== "C")
 					document.getElementById("alternc").style.color="#339933";
-				if(correta== "D")
+				if(jscorreta[j]== "D")
 					document.getElementById("alternd").style.color="#339933";
-				if(correta== "E")
+				if(jscorreta[j]== "E")
 					document.getElementById("alterne").style.color="#339933";
+				
 			}
 			else{
-				// errou
-				// desabilita reponder
-				document.getElementById('responder').disabled = true;
-				$('[type="button"]').button('refresh');
-				
-				if(correta== "A")
+				// errou		
+				if(jscorreta[j]== "A")
 					document.getElementById("alterna").style.color="#339933";
-				if(correta== "B")
+				if(jscorreta[j]== "B")
 					document.getElementById("alternb").style.color="#339933";
-				if(correta== "C")
+				if(jscorreta[j]== "C")
 					document.getElementById("alternc").style.color="#339933";
-				if(correta== "D")
+				if(jscorreta[j]== "D")
 					document.getElementById("alternd").style.color="#339933";
-				if(correta== "E")
+				if(jscorreta[j]== "E")
 					document.getElementById("alterne").style.color="#339933";
 				
 				if(aChk[i].value == "A")
@@ -120,7 +116,13 @@ function verificaChecks() {
 				if(aChk[i].value == "D")
 					document.getElementById("alternd").style.color="#FF0000";
 				if(aChk[i].value == "E")
-					document.getElementById("alterne").style.color="#FF0000";					
+					document.getElementById("alterne").style.color="#FF0000";	
+					
+				
+				
+				// desabilita reponder
+				document.getElementById('responder').disabled = true;
+				$('[type="button"]').button('refresh');				
 			}
 		}  else {
 			// nao marcou nenhuma
