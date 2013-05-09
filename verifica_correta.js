@@ -24,14 +24,14 @@ function onDeviceReady(){
 				correta = data[i].correta; 	
 				// carrega a primeira questao na tela
 						
-				for(i=0; i<cont; i++){ //insere as demais questoes no javascript
-					jsquestao[i] = data[i].questao;
-					jsa[i] = data[i].alternA;
-					jsb[i] = data[i].alternB;
-					jsc[i] = data[i].alternC;
-					jsd[i] = data[i].alternD;
-					jse[i] = data[i].alternE;
-					jscorreta[i] = data[i].correta;
+				for(var k=1; k<cont; k++){ //insere as demais questoes no javascript
+					jsquestao[k] = data[k].questao;
+					jsa[k] = data[k].alternA;
+					jsb[k] = data[k].alternB;
+					jsc[k] = data[k].alternC;
+					jsd[k] = data[k].alternD;
+					jse[k] = data[k].alternE;
+					jscorreta[k] = data[k].correta;
 				}			
 			})
 }
