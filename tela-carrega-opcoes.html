@@ -1,12 +1,10 @@
 <html>
 <head>
-<!-- Inicio configuracao cordova -->
 <!-- Inicio configuracao cordova -->	
 <meta charset="utf-8" />
 <meta name="format-detection" content="telephone=no" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 <script type="text/javascript" src="cordova-2.7.0.js"></script>
-
 <!-- Fim configuracao cordova -->
 
 <!-- Inicio js jquery -->
@@ -15,10 +13,11 @@
 <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 <!-- fim js jquery -->
         
-        <!-- inicio js jquery carrega dificuldade -->
-		<script type="text/javascript">
-        $(document).ready(function()
-        {
+
+<!-- carrega dificuldade e assunto -->
+<script type="text/javascript">
+	function onDeviceReady(){
+		
             $.getJSON("http://www.aaconcursos.com/app/dificuldade.php",function(data){
                 var select = $('#cboDificuldade');
                 if (select.prop) {
@@ -32,15 +31,9 @@
                     options[options.length] = new Option(value['nome'], value['idDificuldade']);
                 });
             });
-        });
-        </script>
-        <!-- fim js jquery carrega dificuldade -->
-        
-        <!-- inicio js jquery carrega assunto -->
-        <script type="text/javascript">
-        $(document).ready(function()
-        {
-            $.getJSON("http://www.aaconcursos.com/app/assunto.php",function(data){
+       
+		
+		 $.getJSON("http://www.aaconcursos.com/app/assunto.php",function(data){
                 var select = $('#cboAssunto');
                 if (select.prop) {
                     var options = select.prop('options');
@@ -53,10 +46,10 @@
                     options[options.length] = new Option(value['nome'], value['idAssunto']);
                 });
             });
-        });
-        </script>
-        <!-- fim js jquery carrega assunto -->
-        
+	
+	}
+</script>
+<!-- fim carrega dificuldade e assunto -->
     
 </head>
 

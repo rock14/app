@@ -6,71 +6,15 @@
 <meta name="format-detection" content="telephone=no" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 <script type="text/javascript" src="cordova-2.7.0.js"></script>
-
 <script type="text/javascript" src="verifica_correta.js"></script>
 <link rel="stylesheet" href="estilo.css" />
-
 <!-- Fim configuracao cordova -->
 
 <!-- Inicio js jquery -->
 <link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
-<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
 <!-- fim js jquery -->
-
-<!-- carrega questoes e alternativas -->
-<script type="text/javascript">
-	function onDeviceReady(){
-		$(document).ready(function(){
-			$.getJSON("http://www.aaconcursos.com/app/questao.php",function(data){
-				//alert(data[0].questao);
-				/*
-				$('textarea[name=questao]').val(data[0].questao);
-				$('textarea[name=alterna]').val(data[0].alternA);
-				$('textarea[name=alternb]').val(data[0].alternB);
-				$('textarea[name=alternc]').val(data[0].alternC);
-				$('textarea[name=alternd]').val(data[0].alternD);
-				$('textarea[name=alterne]').val(data[0].alternE);
-				$('textarea[name=correta]').val(data[0].correta);
-				*/
-				document.getElementById("questao").innerHTML = data[0].questao;
-				document.getElementById("alterna").innerHTML = data[0].alternA;
-				document.getElementById("alternb").innerHTML = data[0].alternB;
-				document.getElementById("alternc").innerHTML = data[0].alternC;
-				document.getElementById("alternd").innerHTML = data[0].alternD;
-				document.getElementById("alterne").innerHTML = data[0].alternE;
-				correta = data[0].correta; 				
-				});
-		});
-	}
-</script>
-<!-- carrega questoes e alternativas -->
-
-<!-- verifica resposta -->
-<script type="text/javascript">
-function verificaChecks() {
-	var aChk = document.getElementsByName("radioquestoes");  
-	for (var i=0;i<aChk.length;i++){  
-		if (aChk[i].checked == true){  
-			// CheckBox Marcado... Faça alguma coisa... Ex:
-			if (aChk[i].value == correta){
-				alert("Acertou");
-			}
-			else{
-				alert("Errou");
-			}
-			
-			//alert(" Marcada: "+ aChk[i].value + "Correta:" + correta);
-
-		}  else {
-			// CheckBox Não Marcado... Faça alguma outra coisa...
-			//alert("Escolha uma resposta!");
-		}
-	}
-} 
-</script>
-<!-- fim verifica resposta -->
-
 </head>
 
 <body onLoad="onDeviceReady()">
@@ -87,29 +31,30 @@ function verificaChecks() {
 
         <fieldset data-role="controlgroup">
           <input type="radio" name="radioquestoes" id="radio-choice-1" value="A" />
-          <label for="radio-choice-1">A) <span id="alterna"></span></label>
+          <label for="radio-choice-1"><span id="alterna"></span></label>
     
           <input type="radio" name="radioquestoes" id="radio-choice-2" value="B"  />
-          <label for="radio-choice-2">B) <span id="alternb"></span></label>
+          <label for="radio-choice-2"><span id="alternb"></span></label>
     
           <input type="radio" name="radioquestoes" id="radio-choice-3" value="C"  />
-          <label for="radio-choice-3">C) <span id="alternc"></span></label>
+          <label for="radio-choice-3"><span id="alternc"></span></label>
     
           <input type="radio" name="radioquestoes" id="radio-choice-4" value="D"  />
-          <label for="radio-choice-4">D) <span id="alternd"></span></label>
+          <label for="radio-choice-4"><span id="alternd"></span></label>
           
           <input type="radio" name="radioquestoes" id="radio-choice-5" value="E"  />
-          <label for="radio-choice-5">E) <span id="alterne"></span></label>
+          <label for="radio-choice-5"><span id="alterne"></span></label>
         </fieldset>     
                 
         <div data-role="navbar">
             <ul>
-                <li><a href="#" data-role="button">< Anterior</a></li>
-                <li><a href="#" data-role="button" value="Valida Checks" onClick="verificaChecks()">Responder</a></li>
-                <!-- ; this.onclick=null; -->
-                <li><a href="#" data-role="button">Próxima ></a></li>
+                <li><input id="anterior" type="button" value="< Anterior" /></li>
+                <li><input id="responder" type="button" value="Responder" onClick="verificaChecks()"/></li>
+                <li><input id="proxima" type="button" value="Próxima >" onClick="proximaQuestao()"/></li>
             </ul>
+            
         </div>
+        
 
     </div>
 
