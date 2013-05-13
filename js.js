@@ -1,4 +1,5 @@
 // JavaScript Document
+// JavaScript Document
 var correta = "I'm a global!";
 var cont = 0;
 var j =0;
@@ -10,38 +11,12 @@ jsc = new Array();
 jsd = new Array();
 jse = new Array();
 jscorreta = new Array();
+arr = new Array();
+var idAssunto;
+var idDificuldade;
 
-
-<!-- carrega questoes e alternativas -->
-function onDeviceReady(){
-			$.getJSON("http://www.aaconcursos.com/app/questao.php",function(data){
-				cont = Object.keys(data).length; //conta a quantidade de objetos no json
-							
-				for(var k=0; k<cont; k++){ //insere as questoes no javascript
-					jsquestao[k] = data[k].questao;
-					jsa[k] = data[k].alternA;
-					jsb[k] = data[k].alternB;
-					jsc[k] = data[k].alternC;
-					jsd[k] = data[k].alternD;
-					jse[k] = data[k].alternE;
-					jscorreta[k] = data[k].correta;
-				}
-				
-				// carrega a primeira questao na tela
-				document.getElementById("questao").innerHTML = jsquestao[0];
-				document.getElementById("alterna").innerHTML = ("A) " +jsa[0]);
-				document.getElementById("alternb").innerHTML = ("B) " +jsb[0]);
-				document.getElementById("alternc").innerHTML = ("C) " +jsc[0]);
-				document.getElementById("alternd").innerHTML = ("D) " +jsd[0]);
-				document.getElementById("alterne").innerHTML = ("E) " +jse[0]);
-				
-				document.getElementById('anterior').disabled = true;
-				$('[type="button"]').button('refresh');				
-			})
-			
-			
-			
-			
+<!-- carrega dificuldades e assuntos -->
+function onDeviceReady(){			
 			$.getJSON("http://www.aaconcursos.com/app/dificuldade.php",function(data){
                 var select = $('#cboDificuldade');
                 if (select.prop) {
@@ -54,8 +29,7 @@ function onDeviceReady(){
                 $.each(data, function(key, value){
                     options[options.length] = new Option(value['nome'], value['idDificuldade']);
                 });
-            });
-       
+            });       
 		
 		 $.getJSON("http://www.aaconcursos.com/app/assunto.php",function(data){
                 var select = $('#cboAssunto');
@@ -69,13 +43,9 @@ function onDeviceReady(){
                 $.each(data, function(key, value){
                     options[options.length] = new Option(value['nome'], value['idAssunto']);
                 });
-            });
-				
-			
-			
+            });			
 }
-
-<!-- carrega questoes e alternativas -->
+<!-- carrega dificuldades e assuntos -->
 
 <!-- voltar questao -->
 	function voltarQuestao(){
@@ -141,7 +111,7 @@ function onDeviceReady(){
 			document.getElementById("alternd").style.color="black";
 			document.getElementById("alterne").style.color="black";
 			
-			document.getElementById("questao").innerHTML = jsquestao[j];
+			document.getElementById("questao").innerHTML = arr[j].questao;
 			document.getElementById("alterna").innerHTML = ("A) " +jsa[j]);
 			document.getElementById("alternb").innerHTML = ("B) " +jsb[j]);
 			document.getElementById("alternc").innerHTML = ("C) " +jsc[j]);
@@ -213,3 +183,54 @@ function verificaChecks() {
 	}
 }
 <!-- fim verifica resposta -->
+
+function iniciaSimulado() {
+	
+	var myselect=document.getElementById("cboDificuldade")
+		for (var i=0; i<myselect.options.length; i++){ //pega o idDificuldade
+		 if (myselect.options[i].selected==true){
+		  //alert("idDificuldade: "+i)
+		  idDificuldade=i;
+		  break
+		 }
+	}
+	
+	var myselect=document.getElementById("cboAssunto")
+		for (var i=0; i<myselect.options.length; i++){ //pega o idAssunto
+		 if (myselect.options[i].selected==true){
+		  //alert("idAssunto: "+i)
+		  i++;
+		  idAssunto=i;
+		  break
+		 }
+	}
+	
+		$.post("http://www.aaconcursos.com/app/opcoesquestao.php", {assunto: idAssunto, dificuldade: idDificuldade},
+		function(data){
+			$("#faznada").html(data);
+				arr = JSON.parse(data);
+				cont = Object.keys(arr).length; //conta a quantidade de objetos no json
+							
+				for(var k=0; k<cont; k++){ //insere as questoes no javascript
+					jsquestao[k] = arr[k].questao;
+					jsa[k] = arr[k].alternA;
+					jsb[k] = arr[k].alternB;
+					jsc[k] = arr[k].alternC;
+					jsd[k] = arr[k].alternD;
+					jse[k] = arr[k].alternE;
+					jscorreta[k] = arr[k].correta;
+				}
+				
+				// carrega a primeira questao na tela
+				document.getElementById("questao").innerHTML = arr[0].questao;
+				document.getElementById("alterna").innerHTML = ("A) " +jsa[0]);
+				document.getElementById("alternb").innerHTML = ("B) " +jsb[0]);
+				document.getElementById("alternc").innerHTML = ("C) " +jsc[0]);
+				document.getElementById("alternd").innerHTML = ("D) " +jsd[0]);
+				document.getElementById("alterne").innerHTML = ("E) " +jse[0]);
+				
+				document.getElementById('anterior').disabled = true;
+				$('[type="button"]').button('refresh');						
+		 }
+		 , "html");
+}
