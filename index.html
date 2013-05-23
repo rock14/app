@@ -1,48 +1,175 @@
 <html>
-	<head>
-    	<!-- Inicio configuracao cordova -->
-    	<meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <script type="text/javascript" src="cordova-2.7.0.js"></script>
-        <script type="text/javascript">
-			function onBodyLoad()
-			{       
-				document.addEventListener("deviceready", onDeviceReady, false)
-			}
-	
-			function onDeviceReady()
-			{
-				// do your thing!
-				navigator.notification.alert("PhoneGap is working")
-			}
-        </script>
-		<!-- Fim configuracao cordova -->
-    
-		<!-- Inicio js jquery -->
-		<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
-		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
-		<!-- fim js jquery -->
-	</head>
-    
-	<body onLoad="onBodyLoad()">
+<head>
+<!-- Inicio configuracao cordova -->	
+<meta charset="utf-8" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<script type="text/javascript" src="cordova-2.7.0.js"></script>
 
-		<div data-role="page">
-			
-			<div data-role="header" data-position="inline">
-				<h1>AA Concursos</h1>
-			</div>
-			
-            <div data-role="content">
-            <a href="cadastro.html" data-role="button" data-ajax="false">Cadastro</a> 
-            <a href="login.html" data-role="button" data-ajax="false">Login</a>
-            <a href="tela-opcoes-simulado.html" data-role="button" data-ajax="false">Guest</a>
-            <a href="tela-carrega-questoes.html" data-role="button" data-ajax="false">Carrega Questoes</a>
-            
-            </div>
-            
-        </div> 
+<!-- Fim configuracao cordova -->
 
-	</body>
+<!-- Inicio js jquery -->
+<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+<!-- fim js jquery -->
+
+<link rel="stylesheet" href="estilo.css" />
+<link rel="stylesheet" href="jqm-icon-pack-2.0-original.css" />
+
+<!-- JS  -->
+<script type="text/javascript" src="js.js"></script>
+<script type="text/javascript" src="cadastro.js"></script>
+<script type="text/javascript" src="login.js"></script>
+<script type="text/javascript" src="atualiza_acertos.js"></script>
+<!-- Fim JS -->
+
+</head>
+
+<body onLoad="onDeviceReady()">
+
+
+<!-- Inicio index -->
+<div data-role="page" id="index">
+			
+    <div data-role="header" data-position="inline">
+    	<a href="#index" data-role="button" data-icon="home">Home</a>
+        <h1>AA Concursos</h1>
+        <button class="ui-btn-right" data-icon="star"><p1><p1></button>
+        <a href="#login" title="remove" data-role="button" data-icon="person" data-rel="dialog" class="ui-btn-right hello"><p2>Login<p2></a>
+    </div>
+    
+    <div data-role="content">
+        <a href="#home" data-role="button" data-ajax="false">Iniciar Simulado</a>
+        <a href="#" data-role="button" data-ajax="false">Estatísticas</a>
+    </div>
+    
+</div> 
+<!-- Fim index -->
+
+
+
+<!-- Inicio pagina carrega opcoes/dificuldade -->
+<div data-role="page" id="home">
+    
+    <div data-role="header" data-position="inline">
+		<a href="#index" data-role="button" data-icon="home">Home</a>
+        <h1>AA Concursos</h1>
+        <button class="ui-btn-right" data-icon="star"><p1><p1></button>
+        <a href="#login" title="remove" data-role="button" data-icon="person" data-rel="dialog" class="ui-btn-right hello"><p2>Login<p2></a>
+        
+	</div>
+
+    <div data-role="content">       
+
+        <select name="cboDificuldade" id="cboDificuldade">
+            <option value="standard">Escolha a dificuldade</option>
+        </select>
+        
+        <select name="cboAssunto" id="cboAssunto">
+            <option value="standard">Escolha o assunto</option>
+        </select>
+        
+        <select name="cboLimite" id="cboLimite">
+            <option value="standard">Escolha o limite</option>
+            <option value="2">2</option>
+            <option value="10">10</option>
+        </select>
+        
+              		
+		<a href="#homequestoes" data-role="button" onClick="iniciaSimulado()">Iniciar Simulado</a>
+		
+    </div>
+          
+</div>
+<!-- Fim pagina carrega opcoes/dificuldade -->
+
+
+
+<!-- Inicio tela carrega questoes -->
+<div data-role="page" id="homequestoes">
+    <div data-role="header" data-position="inline">
+		<a href="#index" data-icon="home">Home</a>
+        <h1>AA Concursos</h1>
+        <button class="ui-btn-right" data-icon="star"><p1><p1></button>
+        <a href="#login" title="remove" data-role="button" data-icon="person" data-rel="dialog" class="ui-btn-right hello"><p2>Login<p2></a>
+	</div>
+  
+    <div data-role="content">
+    	
+        <a href="#" data-role="button"><span id="questao"></span></a>
+
+        <fieldset data-role="controlgroup">
+          <input type="radio" name="radioquestoes" id="radio-choice-1" value="A" />
+          <label for="radio-choice-1"><span id="alterna"></span></label>
+    
+          <input type="radio" name="radioquestoes" id="radio-choice-2" value="B"  />
+          <label for="radio-choice-2"><span id="alternb"></span></label>
+    
+          <input type="radio" name="radioquestoes" id="radio-choice-3" value="C"  />
+          <label for="radio-choice-3"><span id="alternc"></span></label>
+    
+          <input type="radio" name="radioquestoes" id="radio-choice-4" value="D"  />
+          <label for="radio-choice-4"><span id="alternd"></span></label>
+          
+          <input type="radio" name="radioquestoes" id="radio-choice-5" value="E"  />
+          <label for="radio-choice-5"><span id="alterne"></span></label>
+        </fieldset>     
+                
+        <div data-role="navbar">
+            <ul>
+                <li><input id="anterior" type="button" value="< Anterior" onClick="voltarQuestao()"/></li>
+                <li><input id="responder" type="button" value="Responder" onClick="verificaChecks()"/></li>
+                <li><input id="proxima" type="button" value="Próxima >" onClick="proximaQuestao()"/></li>
+            </ul>
+            
+        </div>
+        
+    </div>
+</div>
+<!-- Fim tela carrega questoes -->
+
+
+<!-- Inicio página cadastro-->
+<div data-role="page" id="cadastro">
+        
+        <div data-role="header" data-position="inline">
+            <h1>AA Concursos</h1>
+        </div>
+                
+        <div data-role="content"> 
+            <form action="#" method="post">
+            <label>Nome:<input type="text" name="nome" id="nome" size="50"></label><br>
+            <label>Email:<input type="text" name="email" id="email" size="50"></label><br>
+            <label>Senha:<input type="password" name="senha" id="senha" size="15"></label><br>
+            <input type="button" data-icon="check" value="Enviar" id="enviar" />
+            </form>
+            <a href="#" data-rel="back" data-role="button" data-icon="delete">Voltar</a>
+        </div>
+        
+	</div>
+<!-- Fim página cadastro-->
+
+
+<!-- Inicio página login -->
+<div data-role="page" id="login">
+        
+    <div data-role="header" data-position="inline">
+        <h1>AA Concursos</h1>
+    </div>
+            
+    <div data-role="content"> 
+        <form action="#" method="POST">
+        <label>Email:</label><input type="text" name="elogin" id="elogin" size="50"><br>
+        <label>Senha:</label><input type="password" name="slogin" id="slogin" size="15"><br>
+        <input type="button" data-icon="check" value="Logar" id="logar" name="logar" >
+        </form>
+        <a href="#cadastro" data-role="button" data-icon="plus" data-rel="dialog">Cadastre-se</a>
+        <a href="#" data-role="button" data-icon="alert">Esqueci login/senha</a>
+            
+    </div>
+</div>
+<!-- Fim página login -->
+
+</body>
 </html>

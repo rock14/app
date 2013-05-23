@@ -8,9 +8,21 @@ $(document).ready(function() {
 		var senhaPost = senha.val(); 	
 		$.post("http://www.aaconcursos.com/app/cadastro.php", {nome: nomePost, email: emailPost, senha: senhaPost},
 		function(data){
+		 // procura a string cadastro realizado em data
+		 if(data.search("Cadastro Realizado") > -1 ){
+		 	alert("Cadastro Realizado!");
+		 	window.location = "#home";
+		 }
+		 else{
+			 alert(data);
+		 }
+			
+		 /*
 		 $("#resposta").html(data);
+		 */
 		 }
 		 , "html");
+		 
 	});
 });
 
