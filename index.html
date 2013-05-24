@@ -5,7 +5,6 @@
 <meta name="format-detection" content="telephone=no" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 <script type="text/javascript" src="cordova-2.7.0.js"></script>
-
 <!-- Fim configuracao cordova -->
 
 <!-- Inicio js jquery -->
@@ -14,6 +13,12 @@
 <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 <!-- fim js jquery -->
 
+<!-- JS Gráficos -->
+<script src="/js/highcharts.js"></script>
+<script src="/js/exporting.js"></script>
+<!-- JS Gráficos -->
+
+<!-- CSS -->
 <link rel="stylesheet" href="estilo.css" />
 <link rel="stylesheet" href="jqm-icon-pack-2.0-original.css" />
 
@@ -21,7 +26,6 @@
 <script type="text/javascript" src="js.js"></script>
 <script type="text/javascript" src="cadastro.js"></script>
 <script type="text/javascript" src="login.js"></script>
-<script type="text/javascript" src="atualiza_acertos.js"></script>
 <!-- Fim JS -->
 
 </head>
@@ -41,7 +45,7 @@
     
     <div data-role="content">
         <a href="#home" data-role="button" data-ajax="false">Iniciar Simulado</a>
-        <a href="#" data-role="button" data-ajax="false">Estatísticas</a>
+        <a href="#estatisticas" data-role="button" data-ajax="false">Estatísticas</a>
     </div>
     
 </div> 
@@ -170,6 +174,29 @@
     </div>
 </div>
 <!-- Fim página login -->
+
+
+<!-- Inicio página estatisticas -->
+<div data-role="page" id="estatisticas">
+        
+    <div data-role="header" data-position="inline">
+		<a href="#index" data-role="button" data-icon="home" onClick="removeGraficos()">Home</a>
+        <h1>AA Concursos</h1>
+        <button class="ui-btn-right" data-icon="star"><p1><p1></button>
+        <a href="#login" title="remove" data-role="button" data-icon="person" data-rel="dialog" class="ui-btn-right hello"><p2>Login<p2></a>
+	</div>
+            
+    <div data-role="content"> 
+            
+        <button onClick="mostra()">Desempenho Geral</button>
+       
+        <div id="grafico" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+            
+    </div>
+    
+</div>
+<!-- Fim página estatisticas -->
+
 
 </body>
 </html>
