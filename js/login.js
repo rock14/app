@@ -10,7 +10,7 @@ $(document).ready(function() {
 		 if(data.search("Login Efetuado com Sucesso") > -1 ){
 		 	alert(data);
 			window.location = "#index";
-
+			username = email.val();
 			$('p1').replaceWith(email.val()); // insere o email no botao
 			$('.hello').remove(); // remove o botao de login
 			

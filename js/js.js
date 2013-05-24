@@ -7,6 +7,7 @@ var i =0;
 var controlarespondidas = 0;
 var acertou = 0;
 var errou = 0;
+var username = "[usuário não logado]";
 jsquestao = new Array();
 jsa = new Array();
 jsb = new Array();
@@ -400,4 +401,62 @@ function iniciaSimulado() {
 	$('#responder').button('enable');
 	$('#proxima').button('enable');
 	
+}
+
+
+function mostra(){
+$(function () {
+        $('#grafico').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'Desempenho Geral '+ username
+            },
+            tooltip: {
+        	    pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+            	percentageDecimals: 1,
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Desempenho',
+                data: [
+					{
+                        name: 'Acertos',
+                        y: acertou,
+						color: '#009900'						
+                    },
+					
+                    {
+                        name: 'Erros',
+                        y: errou,
+						color: '#FF0000'
+                    },
+                ]
+            }]
+        });
+    });
+	var div = document.getElementById("grafico");
+	div.style.visibility='visible';
+}
+
+function removeGraficos(){
+	var div = document.getElementById("grafico");
+	div.style.visibility='hidden';
 }

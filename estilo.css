@@ -6,3 +6,12 @@
   white-space: normal !important; 
   text-align: left;
 }
+
+#canvas-container {
+   width: 100%;
+   text-align:left;
+}
+
+canvas {
+   display: inline;
+}

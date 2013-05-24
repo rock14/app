@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Inicio configuracao cordova -->	
+<meta charset="utf-8" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<script type="text/javascript" src="cordova-2.7.0.js"></script>
+<script type="text/javascript" src="js.js"></script>
+<link rel="stylesheet" href="estilo.css" />
+<!-- Fim configuracao cordova -->
+
+<!-- Inicio js jquery -->
+<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+<!-- fim js jquery -->
+
+<!-- JS Cadastro -->
+<script type="text/javascript" src="login.js"></script>
+<!-- Fim Cadastro -->
+
+</head>
+    
+<body>
+
+<div data-role="page" id="login">
+        
+    <div data-role="header" data-position="inline">
+        <h1>AA Concursos</h1>
+    </div>
+            
+    <div data-role="content"> 
+        <form action="#" method="POST">
+        <label>Email:</label><input type="text" name="elogin" id="elogin" size="50"><br>
+        <label>Senha:</label><input type="password" name="slogin" id="slogin" size="15"><br>
+        <input type="button" data-icon="check" value="Logar" id="logar" name="logar" >
+        </form>
+        <a href="#cadastro" data-role="button" data-icon="plus" data-rel="dialog">Cadastre-se</a>
+        <a href="index.html" data-role="button" data-icon="alert">Esqueci login/senha</a>
+            
+    </div>
+</div>
+
+</body>
+
+</html>
