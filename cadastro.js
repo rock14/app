@@ -11,7 +11,7 @@ $(document).ready(function() {
 		 // procura a string cadastro realizado em data
 		 if(data.search("Cadastro Realizado") > -1 ){
 		 	alert("Cadastro Realizado!");
-		 	window.location = "#home";
+		 	window.location = "#login";
 		 }
 		 else{
 			 alert(data);

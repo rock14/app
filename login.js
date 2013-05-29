@@ -7,16 +7,18 @@ $(document).ready(function() {
 		$.post("http://www.aaconcursos.com/app/login.php", {email: emailPost, senha: senhaPost},
 		function(data){
 		 // procura a string login efetuado
-		 if(data.search("Login Efetuado com Sucesso") > -1 ){
+		 if(data.search("Login Inválido") > -1 ){
 		 	alert(data);
-			window.location = "#index";
-			username = email.val();
-			$('p1').replaceWith(email.val()); // insere o email no botao
-			$('.hello').remove(); // remove o botao de login
 			
 		 }
 		 else{
-			 alert(data);
+			
+			idUser = JSON.parse(data);
+			window.location = "#index";
+			username = idUser[0];
+			$('p1').replaceWith(email.val()); // insere o email no botao
+			$('.hello').remove(); // remove o botao de login
+			 
 		 }
 			
 		 /*

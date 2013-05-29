@@ -8,6 +8,9 @@ var controlarespondidas = 0;
 var acertou = 0;
 var errou = 0;
 var username = "[usuário não logado]";
+var idsimulado = 0;
+idUser = new Array();
+jsidQuestao = new Array();
 jsquestao = new Array();
 jsa = new Array();
 jsb = new Array();
@@ -17,12 +20,18 @@ jse = new Array();
 jscorreta = new Array();
 jsrespondida = new Array();
 arr = new Array();
+
 var idAssunto;
 var idDificuldade;
 var idLimite;
 
+
 <!-- carrega questoes e alternativas -->
 function onDeviceReady(){			
+	
+		
+		
+	
 	
 	$.getJSON("http://www.aaconcursos.com/app/dificuldade.php",function(data){
 		var select = $('#cboDificuldade');
@@ -221,15 +230,49 @@ function verificaChecks() {
 	for (var i=0;i<aChk.length;i++){  
 		if (aChk[i].checked == true){  
 			if (aChk[i].value == jscorreta[j]){ // acertou
-				
 				controlarespondidas++;
 				acertou++;
 				
+				//terminou o simulado e mostra o aproveitamento
 				if(controlarespondidas==cont){
 					var aproveitamento = (acertou/cont*100).toFixed(2);
 					alert("Aproveitamento: "+ aproveitamento +"%");
+					
+					// atualiza o simulado a hora fim
+					if(idsimulado != 0){
+						var phpacerto = 0;
+						var phperro = 0;
+						var phptermino = 1;
+						
+						$.post("http://www.aaconcursos.com/app/atualiza_acertos_simulado.php", {idSimulado: idsimulado, phpacerto: phpacerto, phperro: phperro, phptermino: phptermino}, function(data){
+							console.log(data);
+						}, "html");
+					}
+					
+				}
+			
+				// atualiza o banco com as respostas
+				if(idsimulado != 0){
+					$.post("http://www.aaconcursos.com/app/atualiza_respostas.php", {idSimulado: idsimulado, idQuestao: jsidQuestao[j], 
+					opcaoRespondida: aChk[i].value, opcaoCorreta: jscorreta[j]}, function(data){
+						console.log("atualiza_respostas.php: "+ data);
+					}, "html");
 				}
 				
+				// atualiza o simulado com os acertos
+				if(idsimulado != 0){
+					var phpacerto = 1;
+					var phperro = 0;
+					var phptermino = 0;
+					
+					$.post("http://www.aaconcursos.com/app/atualiza_acertos_simulado.php", {idSimulado: idsimulado, phpacerto: phpacerto, phperro: phperro, phptermino: phptermino}, function(data){
+						console.log(data);
+					}, "html");
+				}
+				
+				
+				
+			
 				if(jscorreta[j]== "A"){
 					document.getElementById("alterna").style.color="#339933";
 					jsrespondida[j]="A";
@@ -258,9 +301,42 @@ function verificaChecks() {
 				controlarespondidas++;
 				errou++;
 				
+				//terminou o simulado e mostra o aproveitamento
 				if(controlarespondidas==cont){
 					var aproveitamento = (acertou/cont*100).toFixed(2);
 					alert("Aproveitamento: "+ aproveitamento +"%");
+					
+					// atualiza o simulado a hora fim
+					if(idsimulado != 0){
+						var phpacerto = 0;
+						var phperro = 0;
+						var phptermino = 1;
+						
+						$.post("http://www.aaconcursos.com/app/atualiza_acertos_simulado.php", {idSimulado: idsimulado, phpacerto: phpacerto, phperro: phperro, phptermino: phptermino}, function(data){
+							console.log(data);
+						}, "html");
+					}
+					
+					
+				}
+				
+				if(idsimulado != 0){
+					// atualiza o banco com as respostas
+					$.post("http://www.aaconcursos.com/app/atualiza_respostas.php", {idSimulado: idsimulado, idQuestao: jsidQuestao[j], 
+					opcaoRespondida: aChk[i].value, opcaoCorreta: jscorreta[j]}, function(data){
+						console.log("atualiza_respostas.php: "+ data);
+					}, "html");
+				}
+				
+				// atualiza o simulado com os erros
+				if(idsimulado != 0){
+					var phpacerto = 0;
+					var phperro = 1;
+					var phptermino = 0;
+					
+					$.post("http://www.aaconcursos.com/app/atualiza_acertos_simulado.php", {idSimulado: idsimulado, phpacerto: phpacerto, phperro: phperro, phptermino: phptermino}, function(data){
+						console.log(data);
+					}, "html");
 				}
 				
 				
@@ -314,6 +390,8 @@ function iniciaSimulado() {
 	acertou = 0;
 	errou = 0;
 	
+	
+	
 	var myselect=document.getElementById("cboDificuldade")
 		for (var i=0; i<myselect.options.length; i++){ //pega o idDificuldade
 		 if (myselect.options[i].selected==true){
@@ -350,6 +428,22 @@ function iniciaSimulado() {
 		 }
 	}
 		
+		
+	if(username=="[usuário não logado]"){
+		console.log("nao logado");
+	}
+	else{
+		//cria o simulado
+		$.post("http://www.aaconcursos.com/app/cria_simulado.php", {username: username, limite: idLimite}, function(data){
+			arr = JSON.parse(data);
+			idsimulado = arr[0];
+			console.log("Simulado criado com id: "+idsimulado);
+		}, "html");
+		//console.log("logado");	
+	}
+	
+	
+	
 	$.post("http://www.aaconcursos.com/app/opcoesquestao.php", {assunto: idAssunto, dificuldade: idDificuldade, limite: idLimite},
 	function(data){
 		//$("#faznada").html(data);
@@ -364,6 +458,7 @@ function iniciaSimulado() {
 			}
 							
 			for(var k=0; k<cont; k++){ //insere as questoes no javascript
+				jsidQuestao[k] = arr[k].idQuestao;
 				jsquestao[k] = arr[k].questao;
 				jsa[k] = arr[k].alternA;
 				jsb[k] = arr[k].alternB;
@@ -401,62 +496,4 @@ function iniciaSimulado() {
 	$('#responder').button('enable');
 	$('#proxima').button('enable');
 	
-}
-
-
-function mostra(){
-$(function () {
-        $('#grafico').highcharts({
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false
-            },
-            title: {
-                text: 'Desempenho Geral '+ username
-            },
-            tooltip: {
-        	    pointFormat: '{series.name}: <b>{point.percentage}%</b>',
-            	percentageDecimals: 1,
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: true,
-                        color: '#000000',
-                        connectorColor: '#000000',
-                        formatter: function() {
-                            return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
-                        }
-                    }
-                }
-            },
-            series: [{
-                type: 'pie',
-                name: 'Desempenho',
-                data: [
-					{
-                        name: 'Acertos',
-                        y: acertou,
-						color: '#009900'						
-                    },
-					
-                    {
-                        name: 'Erros',
-                        y: errou,
-						color: '#FF0000'
-                    },
-                ]
-            }]
-        });
-    });
-	var div = document.getElementById("grafico");
-	div.style.visibility='visible';
-}
-
-function removeGraficos(){
-	var div = document.getElementById("grafico");
-	div.style.visibility='hidden';
 }
