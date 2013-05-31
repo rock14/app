@@ -29,10 +29,6 @@ var idLimite;
 <!-- carrega questoes e alternativas -->
 function onDeviceReady(){			
 	
-		
-		
-	
-	
 	$.getJSON("http://www.aaconcursos.com/app/dificuldade.php",function(data){
 		var select = $('#cboDificuldade');
 		if (select.prop) {

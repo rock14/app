@@ -57,3 +57,10 @@ function removeGraficos(){
 	//var div = document.getElementById("grafico");
 	//div.style.visibility='hidden';
 }
+
+function rgraph(){
+	var pie = new RGraph.Pie('cvs', [4,8,4,6,5,3,2,5]);
+	pie.Set('chart.tooltips', ['Alvin','Pete','Hoolio','Jack','Kev','Luis','Lou','Jesse']);
+	pie.Set('chart.labels', ['Alvin','Pete','Hoolio','Jack','Kev','Luis','Lou','Jesse']);
+	pie.Draw();
+}

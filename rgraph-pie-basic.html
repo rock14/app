@@ -22,12 +22,13 @@
 <script src="/js/RGraph.common.dynamic.js" ></script>
 <script src="/js/RGraph.common.tooltips.js" ></script>
 <script src="/js/RGraph.pie.js" ></script>
+<script src="graficos.js" ></script>
+<script src="phonegap.js" ></script>
 <!-- Fim JS -->
 
 </head>
 
-<body onLoad="onDeviceReady()">
-
+<body>
 
 <!-- Inicio index -->
 <div data-role="page" id="index">
@@ -41,26 +42,18 @@
     
     <div data-role="content">
         <canvas id="cvs" width="350" height="250">[No canvas support]</canvas>
-    
-    <script>
-        window.onload = function ()
-        {
-            var pie = new RGraph.Pie('cvs', [4,8,4,6,5,3,2,5]);
-            pie.Set('chart.tooltips', ['Alvin','Pete','Hoolio','Jack','Kev','Luis','Lou','Jesse']);
-            pie.Set('chart.labels', ['Alvin','Pete','Hoolio','Jack','Kev','Luis','Lou','Jesse']);
-            pie.Draw();
-        }
-    </script>
 
 	<br>
 	<a href="index.html" data-role="button" data-ajax="false">home</a>
-        
+    <button onClick="rgraph()"> Mostra </button>
     </div>
     
 </div> 
 <!-- Fim index -->
 
-
+<script type="text/javascript">
+            app.initialize();
+        </script>
 </body>
 </html>
 
