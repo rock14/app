@@ -1,22 +1,46 @@
-<!DOCTYPE html >
 <html>
 <head>
-    
-    <script src="/js/RGraph.common.core.js" ></script>
-    <script src="/js/RGraph.common.dynamic.js" ></script>
-    <script src="/js/RGraph.common.tooltips.js" ></script>
-    <script src="/js/RGraph.pie.js" ></script>
-    <!--[if lt IE 9]><script src="../excanvas/excanvas.js"></script><![endif]-->
+<!-- Inicio configuracao cordova -->	
+<meta charset="utf-8" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<script type="text/javascript" src="cordova-2.7.0.js"></script>
+<!-- Fim configuracao cordova -->
 
-    <title>A basic Pie chart</title>
-    
-  
+<!-- Inicio js jquery -->
+<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+<!-- fim js jquery -->
+
+<!-- CSS -->
+<link rel="stylesheet" href="estilo.css" />
+<link rel="stylesheet" href="jqm-icon-pack-2.0-original.css" />
+
+<!-- JS  -->
+<script src="/js/RGraph.common.core.js" ></script>
+<script src="/js/RGraph.common.dynamic.js" ></script>
+<script src="/js/RGraph.common.tooltips.js" ></script>
+<script src="/js/RGraph.pie.js" ></script>
+<!-- Fim JS -->
+
 </head>
-<body>
 
-    <h1>A basic Pie chart</h1>
+<body onLoad="onDeviceReady()">
 
-    <canvas id="cvs" width="350" height="250">[No canvas support]</canvas>
+
+<!-- Inicio index -->
+<div data-role="page" id="index">
+			
+    <div data-role="header" data-position="inline">
+    	<a href="#index" data-role="button" data-icon="home">Home</a>
+        <h1>AA Concursos</h1>
+        <button class="ui-btn-right" data-icon="star"><p1><p1></button>
+        <a href="#login" title="remove" data-role="button" data-icon="person" data-rel="dialog" class="ui-btn-right hello"><p2>Login<p2></a>
+    </div>
+    
+    <div data-role="content">
+        <canvas id="cvs" width="350" height="250">[No canvas support]</canvas>
     
     <script>
         window.onload = function ()
@@ -30,6 +54,14 @@
 
 	<br>
 	<a href="index.html" data-role="button" data-ajax="false">home</a>
+        
+    </div>
     
+</div> 
+<!-- Fim index -->
+
+
 </body>
 </html>
+
+
