@@ -1,75 +1,54 @@
-<html>
-<head>
-<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'></script>
-</head>
-<body>
-
-        <!-- esse UL vai ser preenchido com o json do php-->
-        <ul></ul>
-
-        <script type='text/javascript'>
-        $(document).ready(function(){
-                /* chama o php com o array json_encoded */
-                $.getJSON('conexao.php', function(data) {
-                        /* data will hold the php array as a javascript object */
-                	$.each(data, function(key, val) {
-                                $('ul').append('<li id="' + key + '">' + val.idDificuldade + ' ' + val.nome + ' ' + val.email + ' ' + val.age + '</li>');
-                        });
-                });
-
-        });
-        </script>
-
-</body>
-</html>
-
 <!--
-<!doctype html>
-<html lang="pt-br" dir="ltr">
-    <head>
-        <title>JSON Ajax com jQuery</title>
-        <meta charset="utf-8"/>
-    </head>
-<body>
- 
-<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
-		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+You are free to copy and use this sample in accordance with the terms of the
+Apache license (http://www.apache.org/licenses/LICENSE-2.0.html)
+-->
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>
+      Google Visualization API Sample
+    </title>
+    
+    <script type="text/javascript" src="graficos.js"></script>
+   
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    
+    <script type="text/javascript">
+      google.load('visualization', '1', {packages: ['corechart']});
+    </script>
+    
+    <!--
+    <script type="text/javascript">
+      function drawVisualization() {
+        // Create and populate the data table.
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Work', 11],
+          ['Eat', 2],
+          ['Commute', 2],
+          ['Watch TV', 2],
+          ['Sleep', 7]
+        ]);
+      
+        // Create and draw the visualization.
+        new google.visualization.PieChart(document.getElementById('visualization')).
+            draw(data, {title:"So, how was your day?"});
+      }
+      
 
-
-
-<script type="text/javascript">
-//inicio o jquery
-$(document).ready(function() {
-// inicio uma requisição
-    $.ajax({
-    // url para o arquivo json.php
-        url : "http://localhost/teste.php",
-    // dataType json
-        dataType : "json",
-    // função para de sucesso
-        success : function(data){
-        // vamos gerar um html e guardar nesta variável
-            var html = "";
-             
-        // executo este laço para ecessar os itens do objeto javaScript
-            for($i=0; $i < data.length; $i++){
-            // coloco o nome e sobre nome
-                html += "<strong>Nome:</strong> "+data[$i].nome +" "+ data[$i].sobreNome;
-            // coloco a cidade
-                html += " <strong>Cidade:</strong> "+data[$i].cidade
-            // e por ultimo dou uma quebra de linha
-                html += "<br />";
-            }//fim do laço
-             
-        //coloco a variável html na tela
-            $('body').html(html);
-        }
-    });//termina o ajax
-});//termina o jquery
-</script>
-
-
-</body>
+      google.setOnLoadCallback(drawVisualization);
+    </script>
+    -->
+    
+  </head>
+  
+  
+  <body style="font-family: Arial;border: 0 none;">
+  
+    <div id="visualization" style="width: 600px; height: 400px;"></div>
+    <button onclick="desenha()"> Desenha </button>
+  </body>
 </html>
+​

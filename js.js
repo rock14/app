@@ -28,6 +28,7 @@ var idLimite;
 
 <!-- carrega questoes e alternativas -->
 function onDeviceReady(){			
+	//mostra2();
 	
 	$.getJSON("http://www.aaconcursos.com/app/dificuldade.php",function(data){
 		var select = $('#cboDificuldade');
@@ -408,9 +409,9 @@ function iniciaSimulado() {
 	}
 	
 	var myselect=document.getElementById("cboLimite")
-		for (var i=0; i<myselect.options.length; i++){ //pega o idLimite
+		for (var i=0; i<myselect.options.length; i++){ 
 		 if (myselect.options[i].selected==true){
-		  
+		  //pega o idLimite
 		  idLimite=myselect.options[i].value;
 		  
 		  if(idLimite=="standard"){
@@ -430,7 +431,7 @@ function iniciaSimulado() {
 	}
 	else{
 		//cria o simulado
-		$.post("http://www.aaconcursos.com/app/cria_simulado.php", {username: username, limite: idLimite}, function(data){
+		$.post("http://www.aaconcursos.com/app/cria_simulado.php", {username: username, limite: idLimite, idassunto: idAssunto}, function(data){
 			arr = JSON.parse(data);
 			idsimulado = arr[0];
 			console.log("Simulado criado com id: "+idsimulado);

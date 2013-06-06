@@ -1,17 +1,20 @@
 <html>
 <head>
+
+
 <!-- Inicio configuracao cordova -->	
 <meta charset="utf-8" />
 <meta name="format-detection" content="telephone=no" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 <script type="text/javascript" src="cordova-2.7.0.js"></script>
-<script src="phonegap.js" ></script>
+
 <!-- Fim configuracao cordova -->
 
 <!-- Inicio js jquery -->
 <link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
 <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js">
+</script>
 <!-- fim js jquery -->
 
 <!-- CSS -->
@@ -22,8 +25,18 @@
 <script type="text/javascript" src="js.js"></script>
 <script type="text/javascript" src="cadastro.js"></script>
 <script type="text/javascript" src="login.js"></script>
-<script type="text/javascript" src="graficos.js"></script>
+<script type="text/javascript" src="dados_js_php_grafico.js"></script>
+<script type="text/javascript" src="desenha_graficos.js"></script>
+
 <!-- Fim JS -->
+
+
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
+<script type="text/javascript">
+  google.load('visualization', '1', {packages: ['corechart']});
+</script>
+ 
 
 </head>
 
@@ -42,9 +55,7 @@
     
     <div data-role="content">
         <a href="#home" data-role="button" data-ajax="false">Iniciar Simulado</a>
-        <a href="rgraph-pie-basic.html" data-role="button" data-ajax="false">rgraph-pie-basic</a>
-        <a href="highcharts.html" data-role="button" data-ajax="false">highcharts</a>
-        
+        <button onClick="handler_grafico_desempenho()"> Gráficos de Desempenho </button>
     </div>
     
 </div> 
@@ -174,8 +185,29 @@
 </div>
 <!-- Fim página login -->
 
-<script type="text/javascript">
-	app.initialize();
-</script>
+
+
+<!-- Inicio página grafico -->
+<div data-role="page" id="grafico">
+        
+    <div data-role="header" data-position="inline">
+    	<a href="#index" data-role="button" data-icon="home">Home</a>
+        <h1>AA Concursos</h1>
+        <button class="ui-btn-right" data-icon="star"><p1><p1></button>
+        <a href="#login" title="remove" data-role="button" data-icon="person" data-rel="dialog" class="ui-btn-right hello"><p2>Login<p2></a>
+    </div>
+            
+    <div data-role="content"> 
+        
+        <button onClick="total_tempo_estudado()">Tempo Estudado</button>
+        <button onClick="acerto_erros_total()">Desempenho por Assunto</button>
+        
+        <div id="visualization" style="width: 100%; height: 300px;"></div>
+       
+            
+    </div>
+</div>
+<!-- Fim página grafico -->
+
 </body>
 </html>

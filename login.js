@@ -14,6 +14,7 @@ $(document).ready(function() {
 		 else{
 			
 			idUser = JSON.parse(data);
+			alert("Login Efetuado com Sucesso!");
 			window.location = "#index";
 			username = idUser[0];
 			$('p1').replaceWith(email.val()); // insere o email no botao
