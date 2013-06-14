@@ -1,54 +1,80 @@
-<!--
-You are free to copy and use this sample in accordance with the terms of the
-Apache license (http://www.apache.org/licenses/LICENSE-2.0.html)
--->
+<html>
+<head>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>
-      Google Visualization API Sample
-    </title>
-    
-    <script type="text/javascript" src="graficos.js"></script>
-   
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-    
-    <script type="text/javascript">
-      google.load('visualization', '1', {packages: ['corechart']});
-    </script>
-    
-    <!--
-    <script type="text/javascript">
-      function drawVisualization() {
-        // Create and populate the data table.
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Work', 11],
-          ['Eat', 2],
-          ['Commute', 2],
-          ['Watch TV', 2],
-          ['Sleep', 7]
-        ]);
-      
-        // Create and draw the visualization.
-        new google.visualization.PieChart(document.getElementById('visualization')).
-            draw(data, {title:"So, how was your day?"});
-      }
-      
 
-      google.setOnLoadCallback(drawVisualization);
-    </script>
-    -->
+<!-- Inicio configuracao cordova -->	
+<meta charset="utf-8" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<script type="text/javascript" src="cordova-2.7.0.js"></script>
+
+<!-- Fim configuracao cordova -->
+
+<!-- Inicio js jquery -->
+<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js">
+</script>
+<!-- fim js jquery -->
+
+<!-- CSS -->
+<link rel="stylesheet" href="estilo.css" />
+<link rel="stylesheet" href="jqm-icon-pack-2.0-original.css" />
+
+<!-- JS  -->
+<script type="text/javascript" src="js.js"></script>
+<script type="text/javascript" src="cadastro.js"></script>
+<script type="text/javascript" src="login.js"></script>
+<script type="text/javascript" src="dados_js_php_grafico.js"></script>
+<script type="text/javascript" src="desenha_graficos.js"></script>
+
+<!-- Fim JS -->
+
+
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
+<script type="text/javascript">
+  google.load('visualization', '1', {packages: ['corechart']});
+</script>
+ 
+
+
+</head>
+
+<body">
+
+
+<!-- Inicio index -->
+<div data-role="page" id="index">
+	
+			
+    <div data-role="header" data-position="inline">
+    	<a href="#index" data-role="button" data-icon="home">Home</a>
+        <h1>AA Concursos</h1>
+        <button class="ui-btn-right" data-icon="star"><p1><p1></button>
+        <a href="#login" title="remove" data-role="button" data-icon="person" data-rel="dialog" class="ui-btn-right hello"><p2>Login<p2></a>
+    </div>
     
-  </head>
-  
-  
-  <body style="font-family: Arial;border: 0 none;">
-  
-    <div id="visualization" style="width: 600px; height: 400px;"></div>
-    <button onclick="desenha()"> Desenha </button>
-  </body>
+    <div data-role="content">
+    	
+        <input id="data" type="datetime-local"> </div>
+        <button onClick="mostrarr()"> Mostra </button>
+     
+    </div>
+    
+</div> 
+<!-- Fim index -->
+
+<script>
+	function mostrarr(){
+		var teste =  document.getElementById("data").innerHTML;
+		alert(teste);
+		
+	}
+
+</script>
+
+
+
+</body>
 </html>
-​
